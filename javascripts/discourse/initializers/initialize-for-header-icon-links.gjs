@@ -4,6 +4,7 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 import { escapeExpression } from "discourse/lib/utilities";
 import icon from "discourse-common/helpers/d-icon";
 import isValidUrl from "../lib/isValidUrl";
+import User from "discourse/models/user"
 
 function buildIcon(iconNameOrImageUrl, title) {
   if (isValidUrl(iconNameOrImageUrl)) {
@@ -34,8 +35,11 @@ export default {
         }
 
         links.forEach((link, index) => {
+          console.log('=== A',link)
           const iconTemplate = buildIcon(link.icon, link.title);
           const className = `header-icon-${dasherize(link.title)}`;
+          const href = link.url.replace('%{username}', User.currentProp("username"));
+          console.log('=== B',href)
           const target = link.target === "blank" ? "_blank" : "";
           const rel = link.target ? "noopener" : "";
           const isLastLink =
