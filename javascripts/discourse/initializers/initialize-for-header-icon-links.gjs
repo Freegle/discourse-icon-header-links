@@ -35,12 +35,9 @@ export default {
         }
 
         links.forEach((link, index) => {
-          console.log('=== A',link)
           const iconTemplate = buildIcon(link.icon, link.title);
           const className = `header-icon-${dasherize(link.title)}`;
-          console.log('=== B',User.currentProp("username"))
           link.url = link.url.replace('chris_cant', User.currentProp("username"));
-          console.log('=== C',link.url)
           const target = link.target === "blank" ? "_blank" : "";
           const rel = link.target ? "noopener" : "";
           const isLastLink =
